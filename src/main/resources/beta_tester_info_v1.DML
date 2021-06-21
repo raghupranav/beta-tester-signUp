@@ -1,0 +1,14 @@
+create table IF NOT EXISTS my_keyspace_v1.beta_tester_info_v1(
+beta_tester_id text,
+first_name text,
+last_name text,
+product text,
+registered_at timestamp,
+email_id text,
+social_media_handles map<text,text>,
+development_tools map<text,text>,
+location text,
+PRIMARY KEY (beta_tester_id)
+) WITH COMMENT = 'Beta Testers info';
+
+create index on my_keyspace_v1.beta_tester_info_v1 (location);
