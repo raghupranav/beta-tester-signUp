@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -16,6 +18,7 @@ import com.beta.testers.signup.entity.TesterEntity;
 import com.beta.testers.signup.exception.ServiceException;
 import com.beta.testers.signup.repository.TesterRepository;
 
+@RunWith(JUnit4.class)
 public class BetaTestersServiceImplTest {
 
 	private BetaTestersServiceImpl serviceImpl;
@@ -28,15 +31,16 @@ public class BetaTestersServiceImplTest {
 
 	@Before
 	public void initMocks() {
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 		serviceImpl = new BetaTestersServiceImpl(repository, mapper);
 	}
 
 	@Test
 	public void testUserSignUp() throws ServiceException {
+		initMocks();
 		BetaTester betaTester = getUserData();
 		TesterEntity testerEntity = new TesterEntity();
-		Mockito.when(repository.save(Mockito.any())).thenReturn(testerEntity);
+		Mockito.when(repository.save(testerEntity)).thenReturn(testerEntity);
 		Mockito.when(mapper.map(betaTester, TesterEntity.class)).thenReturn(testerEntity);
 		TesterEntity response = serviceImpl.userSignUp(betaTester);
 		Assert.notNull(response);
