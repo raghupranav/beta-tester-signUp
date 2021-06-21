@@ -14,4 +14,5 @@ This is a Sample project demonstrating REST API's that allows developers to sign
 
 * Schema Validation for API requests.
 * Implement business development & product development related API
+* AOP based logging
 
